@@ -1,0 +1,11 @@
+{
+  "adapter": "pinecone",
+  "operation": "concurrency",
+  "label": "optimized_v2",
+  "p50_ms": 311.3358588889241,
+  "p95_ms": 1703.6994630470872,
+  "p99_ms": 1911.4329302683473,
+  "qps": 37.41,
+  "clients": 25,
+  "timestamp": "2026-04-23T15:50:26.675724+00:00"
+}

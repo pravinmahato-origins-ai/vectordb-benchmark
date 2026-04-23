@@ -1,0 +1,11 @@
+{
+  "adapter": "pinecone",
+  "operation": "query_filtered",
+  "label": "optimized_v2",
+  "p50_ms": 305.4630057886243,
+  "p95_ms": 597.1443420276046,
+  "p99_ms": 679.5760625973344,
+  "qps": 2.8,
+  "clients": 1,
+  "timestamp": "2026-04-23T15:48:32.197375+00:00"
+}

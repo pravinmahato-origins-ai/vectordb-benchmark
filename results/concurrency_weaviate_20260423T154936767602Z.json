@@ -1,0 +1,11 @@
+{
+  "adapter": "weaviate",
+  "operation": "concurrency",
+  "label": "optimized_v2",
+  "p50_ms": 1.5593944117426872,
+  "p95_ms": 2.495282329618931,
+  "p99_ms": 3.638726659119129,
+  "qps": 579.99,
+  "clients": 1,
+  "timestamp": "2026-04-23T15:49:36.440673+00:00"
+}

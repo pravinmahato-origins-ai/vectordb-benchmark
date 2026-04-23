@@ -1,0 +1,11 @@
+{
+  "adapter": "pgvector",
+  "operation": "query_filtered",
+  "label": "optimized_v2",
+  "p50_ms": 1.2311739847064018,
+  "p95_ms": 1.5288619324564934,
+  "p99_ms": 1.822478137910366,
+  "qps": 794.47,
+  "clients": 1,
+  "timestamp": "2026-04-23T15:46:11.428948+00:00"
+}

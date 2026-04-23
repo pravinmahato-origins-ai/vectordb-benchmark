@@ -1,0 +1,14 @@
+{
+  "adapter": "weaviate",
+  "operation": "insert",
+  "p50_ms": 27.550059370696545,
+  "p95_ms": 38.603976368904114,
+  "p99_ms": 38.603976368904114,
+  "qps": 33.86,
+  "clients": 1,
+  "timestamp": "2026-04-23T10:10:32.487620+00:00",
+  "total_records": 1700,
+  "total_ms": 503.64,
+  "records_per_sec": 3375.4,
+  "batch_size": 100
+}

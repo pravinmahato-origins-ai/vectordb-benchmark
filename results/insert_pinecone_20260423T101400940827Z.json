@@ -1,0 +1,14 @@
+{
+  "adapter": "pinecone",
+  "operation": "insert",
+  "p50_ms": 12425.649272277951,
+  "p95_ms": 19358.066560700536,
+  "p99_ms": 19358.066560700536,
+  "qps": 0.08,
+  "clients": 1,
+  "timestamp": "2026-04-23T10:14:00.937351+00:00",
+  "total_records": 1700,
+  "total_ms": 205354.91,
+  "records_per_sec": 8.28,
+  "batch_size": 100
+}

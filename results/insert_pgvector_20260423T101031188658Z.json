@@ -1,0 +1,14 @@
+{
+  "adapter": "pgvector",
+  "operation": "insert",
+  "p50_ms": 553.3860074356198,
+  "p95_ms": 738.1544262170792,
+  "p99_ms": 738.1544262170792,
+  "qps": 1.93,
+  "clients": 1,
+  "timestamp": "2026-04-23T10:10:31.186560+00:00",
+  "total_records": 1700,
+  "total_ms": 8831.03,
+  "records_per_sec": 192.5,
+  "batch_size": 100
+}
