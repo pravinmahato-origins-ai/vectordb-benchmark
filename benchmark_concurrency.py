@@ -32,14 +32,14 @@ def run_level(adapter, vectors: list[list[float]], n_clients: int, n_queries: in
     return latencies, wall_time_s
 
 
-def run_concurrency(adapter_name: str, adapter, records: list[dict], client_levels: list[int]) -> list[dict]:
+def run_concurrency(adapter_name: str, adapter, records: list[dict], client_levels: list[int], label: str = "baseline") -> list[dict]:
     vectors = [r["embedding"] for r in records]
 
     adapter.setup()
     results = []
     for n in client_levels:
         latencies, wall_time_s = run_level(adapter, vectors, n_clients=n, n_queries=QUERIES_PER_LEVEL)
-        r = build_result(adapter_name, "concurrency", latencies, clients=n, wall_time_s=wall_time_s)
+        r = build_result(adapter_name, "concurrency", latencies, clients=n, wall_time_s=wall_time_s, label=label)
         results.append(r)
         print(f"  [{adapter_name}] clients={n} p50={r['p50_ms']:.1f}ms p99={r['p99_ms']:.1f}ms qps={r['qps']}")
     adapter.close()
@@ -51,6 +51,7 @@ def main():
     parser.add_argument("--adapters", default=",".join(DEFAULT_ADAPTERS))
     parser.add_argument("--clients", default="1,5,10,25")
     parser.add_argument("--dataset", default="dataset.jsonl")
+    parser.add_argument("--label", default="baseline")
     args = parser.parse_args()
 
     client_levels = [int(c) for c in args.clients.split(",")]
@@ -62,7 +63,7 @@ def main():
     adapters = load_adapters(adapter_names)
 
     for name, adapter in adapters.items():
-        results = run_concurrency(name, adapter, records, client_levels)
+        results = run_concurrency(name, adapter, records, client_levels, label=args.label)
         for r in results:
             write_result(r, prefix="concurrency")
 

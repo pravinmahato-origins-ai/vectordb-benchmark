@@ -24,6 +24,11 @@ class SqliteVecAdapter(VectorDBAdapter):
         sqlite_vec.load(conn)
         conn.enable_load_extension(False)
         conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA cache_size = -65536")       # 64 MB page cache
+        conn.execute("PRAGMA mmap_size = 268435456")     # 256 MB mmap I/O
+        conn.execute("PRAGMA temp_store = MEMORY")       # temp tables in RAM
+        conn.execute("PRAGMA synchronous = NORMAL")      # safe with WAL, avoids full fsync
+        conn.execute("PRAGMA wal_autocheckpoint = 10000") # checkpoint every 10000 pages, avoids blocking readers under concurrent load
         return conn
 
     def _get_conn(self) -> sqlite3.Connection:

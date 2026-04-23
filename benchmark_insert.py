@@ -13,7 +13,7 @@ BATCH_SIZE = 100
 DEFAULT_ADAPTERS = ["pgvector", "sqlite_vec", "weaviate"]
 
 
-def run_insert(adapter_name: str, adapter, records: list[dict]) -> dict:
+def run_insert(adapter_name: str, adapter, records: list[dict], label: str = "baseline") -> dict:
     adapter.reset()
     batches = [records[i:i + BATCH_SIZE] for i in range(0, len(records), BATCH_SIZE)]
     batch_latencies = []
@@ -38,6 +38,7 @@ def run_insert(adapter_name: str, adapter, records: list[dict]) -> dict:
             "records_per_sec": round(records_per_sec, 2),
             "batch_size": BATCH_SIZE,
         },
+        label=label,
     )
     adapter.close()
     return result
@@ -47,6 +48,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--adapters", default=",".join(DEFAULT_ADAPTERS))
     parser.add_argument("--dataset", default="dataset.jsonl")
+    parser.add_argument("--label", default="baseline")
     args = parser.parse_args()
 
     with open(args.dataset) as f:
@@ -57,7 +59,7 @@ def main():
     adapters = load_adapters(adapter_names)
 
     for name, adapter in adapters.items():
-        result = run_insert(name, adapter, records)
+        result = run_insert(name, adapter, records, label=args.label)
         path = write_result(result, prefix="insert")
         print(f"[{name}] {result['records_per_sec']} rec/s → {path}")
 

@@ -11,6 +11,7 @@ class WeaviateAdapter(VectorDBAdapter):
     def __init__(self, url: str = "http://localhost:8080"):
         self._url = url
         self._client = None
+        self._col = None
 
     def reset(self) -> None:
         parsed = urlparse(self._url)
@@ -34,6 +35,7 @@ class WeaviateAdapter(VectorDBAdapter):
                 wvc.config.Property(name="ext_id", data_type=wvc.config.DataType.TEXT),
             ],
         )
+        self._col = self._client.collections.get(COLLECTION_NAME)
 
     def setup(self) -> None:
         parsed = urlparse(self._url)
@@ -41,9 +43,9 @@ class WeaviateAdapter(VectorDBAdapter):
             host=parsed.hostname,
             port=parsed.port or 8080,
         )
+        self._col = self._client.collections.get(COLLECTION_NAME)
 
     def insert_batch(self, records: list[dict]) -> None:
-        col = self._client.collections.get(COLLECTION_NAME)
         objects = [
             wvc.data.DataObject(
                 properties={
@@ -56,7 +58,7 @@ class WeaviateAdapter(VectorDBAdapter):
             )
             for r in records
         ]
-        col.data.insert_many(objects)
+        self._col.data.insert_many(objects)
 
     def query(
         self,
@@ -64,7 +66,7 @@ class WeaviateAdapter(VectorDBAdapter):
         top_k: int,
         filters: dict | None = None,
     ) -> tuple[list, float]:
-        col = self._client.collections.get(COLLECTION_NAME)
+        col = self._col
         weaviate_filter = None
         if filters and "category" in filters:
             weaviate_filter = wvc.query.Filter.by_property("category").equal(filters["category"])

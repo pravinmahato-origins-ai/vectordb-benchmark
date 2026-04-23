@@ -18,12 +18,14 @@ def build_result(
     clients: int = 1,
     extra: dict | None = None,
     wall_time_s: float | None = None,
+    label: str = "baseline",
 ) -> dict:
     total_s = wall_time_s if wall_time_s is not None else sum(latencies_ms) / 1000
     qps = len(latencies_ms) / total_s if total_s > 0 else 0
     record = {
         "adapter": adapter,
         "operation": operation,
+        "label": label,
         "p50_ms": percentile(latencies_ms, 50),
         "p95_ms": percentile(latencies_ms, 95),
         "p99_ms": percentile(latencies_ms, 99),

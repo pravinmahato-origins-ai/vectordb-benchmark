@@ -1,13 +1,28 @@
+import io
 import time
 import psycopg2
 import psycopg2.extras
 from psycopg2.pool import ThreadedConnectionPool
+from urllib.parse import urlparse, urlencode, parse_qs, urlunparse, quote
 from adapters.base import VectorDBAdapter
 
 
+def _escape_copy(s: str) -> str:
+    """Escape special characters for PostgreSQL COPY text format."""
+    return s.replace("\\", "\\\\").replace("\t", "\\t").replace("\n", "\\n").replace("\r", "\\r")
+
+
+def _url_with_guc(url: str, key: str, val: int) -> str:
+    p = urlparse(url)
+    qs = parse_qs(p.query, keep_blank_values=True)
+    new_opt = f"-c {key}={val}"
+    qs["options"] = [qs["options"][0] + " " + new_opt] if "options" in qs else [new_opt]
+    return urlunparse(p._replace(query=urlencode(qs, doseq=True, quote_via=quote)))
+
+
 class PgvectorAdapter(VectorDBAdapter):
-    def __init__(self, url: str):
-        self._url = url
+    def __init__(self, url: str, ef_search: int = 40):
+        self._url = _url_with_guc(url, "hnsw.ef_search", ef_search)
         self._pool = None
 
     def reset(self) -> None:
@@ -41,15 +56,20 @@ class PgvectorAdapter(VectorDBAdapter):
     def insert_batch(self, records: list[dict]) -> None:
         conn = self._pool.getconn()
         try:
+            buf = io.StringIO()
+            for r in records:
+                buf.write("\t".join([
+                    r["id"],
+                    str(r["embedding"]),
+                    _escape_copy(r["text"]),
+                    r["category"],
+                    r["timestamp"],
+                ]) + "\n")
+            buf.seek(0)
             with conn.cursor() as cur:
-                psycopg2.extras.execute_batch(
-                    cur,
-                    "INSERT INTO embeddings (id, embedding, text, category, ts) VALUES (%s, %s::vector, %s, %s, %s)",
-                    [
-                        (r["id"], str(r["embedding"]), r["text"], r["category"], r["timestamp"])
-                        for r in records
-                    ],
-                    page_size=100,
+                cur.copy_expert(
+                    "COPY embeddings (id, embedding, text, category, ts) FROM STDIN",
+                    buf,
                 )
             conn.commit()
         finally:
