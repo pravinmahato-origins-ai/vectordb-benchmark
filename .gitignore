@@ -221,8 +221,6 @@ __marimo__/
 docs/superpowers
 
 # Benchmark-specific
-results/*.json
-dataset.jsonl
 benchmark.db
 opencode.json
 results copy.ipynb
