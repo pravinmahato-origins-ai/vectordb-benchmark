@@ -1,7 +1,7 @@
 psycopg2-binary>=2.9
 sqlite-vec>=0.1
 weaviate-client>=4.0
-pinecone-client>=3.0
+pinecone>=8.0
 numpy>=1.26
 tqdm>=4.66
 jupyter>=1.0

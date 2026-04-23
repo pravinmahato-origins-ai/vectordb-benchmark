@@ -224,3 +224,5 @@ docs/superpowers
 results/*.json
 dataset.jsonl
 benchmark.db
+opencode.json
+results copy.ipynb
