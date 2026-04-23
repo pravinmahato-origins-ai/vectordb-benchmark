@@ -219,3 +219,8 @@ __marimo__/
 
 # Others
 docs/superpowers
+
+# Benchmark-specific
+results/*.json
+dataset.jsonl
+benchmark.db
