@@ -58,6 +58,9 @@ def load_adapters(names: list[str]) -> dict:
     if "pgvector" in names:
         from adapters.pgvector import PgvectorAdapter
         adapters["pgvector"] = PgvectorAdapter(url=os.environ["POSTGRES_URL"])
+    if "pgvanilla" in names:
+        from adapters.pgvanilla import PgvanillaAdapter
+        adapters["pgvanilla"] = PgvanillaAdapter(url=os.environ["POSTGRES_VANILLA_URL"])
     if "sqlite_vec" in names:
         from adapters.sqlite_vec import SqliteVecAdapter
         adapters["sqlite_vec"] = SqliteVecAdapter(path=os.getenv("SQLITE_PATH", "./benchmark.db"))

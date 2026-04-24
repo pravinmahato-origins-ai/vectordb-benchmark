@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Usage: python benchmark_insert.py [--adapters pgvector,sqlite_vec,weaviate,pinecone]
+Usage: python benchmark_insert.py [--adapters pgvector,pgvanilla,sqlite_vec,weaviate,pinecone]
 Reads dataset.jsonl, inserts all records in batches of 100, emits results/insert_<adapter>_<ts>.json
 """
 import argparse

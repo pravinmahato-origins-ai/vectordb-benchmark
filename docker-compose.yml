@@ -18,6 +18,24 @@ services:
       timeout: 5s
       retries: 10
 
+  postgres-vanilla:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: vectordb
+    ports:
+      - "5434:5432"
+    command: >
+      postgres
+      -c shared_buffers=256MB
+      -c work_mem=64MB
+      -c effective_cache_size=512MB
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   weaviate:
     image: semitechnologies/weaviate:latest
     environment:

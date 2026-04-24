@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Usage: python benchmark_query.py [--adapters pgvector,sqlite_vec,weaviate,pinecone]
+Usage: python benchmark_query.py [--adapters pgvector,pgvanilla,sqlite_vec,weaviate,pinecone]
 Runs 200 query rounds per adapter (ANN + filtered), emits results/query_<adapter>_<ts>.json
 """
 import argparse
