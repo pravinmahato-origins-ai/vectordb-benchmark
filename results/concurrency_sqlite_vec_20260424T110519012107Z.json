@@ -1,0 +1,11 @@
+{
+  "adapter": "sqlite_vec",
+  "operation": "concurrency",
+  "label": "optimized_v3",
+  "p50_ms": 1.9172830507159233,
+  "p95_ms": 2.224304713308811,
+  "p99_ms": 3.161952830851078,
+  "qps": 488.98,
+  "clients": 1,
+  "timestamp": "2026-04-24T11:05:18.408141+00:00"
+}

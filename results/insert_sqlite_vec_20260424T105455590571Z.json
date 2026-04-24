@@ -1,0 +1,15 @@
+{
+  "adapter": "sqlite_vec",
+  "operation": "insert",
+  "label": "optimized_v3",
+  "p50_ms": 6.041558459401131,
+  "p95_ms": 15.423852950334549,
+  "p99_ms": 15.423852950334549,
+  "qps": 125.54,
+  "clients": 1,
+  "timestamp": "2026-04-24T10:54:55.570203+00:00",
+  "total_records": 1700,
+  "total_ms": 136.39,
+  "records_per_sec": 12464.33,
+  "batch_size": 100
+}

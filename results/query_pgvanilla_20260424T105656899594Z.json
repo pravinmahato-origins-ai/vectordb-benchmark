@@ -1,0 +1,11 @@
+{
+  "adapter": "pgvanilla",
+  "operation": "query_filtered",
+  "label": "optimized_v3",
+  "p50_ms": 52.67070699483156,
+  "p95_ms": 67.10782274603844,
+  "p99_ms": 72.30251282453537,
+  "qps": 18.76,
+  "clients": 1,
+  "timestamp": "2026-04-24T10:56:56.899160+00:00"
+}

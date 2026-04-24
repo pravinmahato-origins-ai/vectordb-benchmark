@@ -1,0 +1,15 @@
+{
+  "adapter": "pgvanilla",
+  "operation": "insert",
+  "label": "optimized_v3",
+  "p50_ms": 175.9917763993144,
+  "p95_ms": 194.96950507164001,
+  "p99_ms": 194.96950507164001,
+  "qps": 5.61,
+  "clients": 1,
+  "timestamp": "2026-04-24T10:54:54.973509+00:00",
+  "total_records": 1700,
+  "total_ms": 3034.97,
+  "records_per_sec": 560.14,
+  "batch_size": 100
+}

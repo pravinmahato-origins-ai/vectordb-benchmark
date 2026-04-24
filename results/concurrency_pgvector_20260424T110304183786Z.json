@@ -1,0 +1,11 @@
+{
+  "adapter": "pgvector",
+  "operation": "concurrency",
+  "label": "optimized_v3",
+  "p50_ms": 6.490943022072315,
+  "p95_ms": 13.0161726847291,
+  "p99_ms": 18.746131099760532,
+  "qps": 191.97,
+  "clients": 10,
+  "timestamp": "2026-04-24T11:03:03.592592+00:00"
+}

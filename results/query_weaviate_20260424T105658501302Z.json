@@ -1,0 +1,11 @@
+{
+  "adapter": "weaviate",
+  "operation": "query_ann",
+  "label": "optimized_v3",
+  "p50_ms": 1.455407589673996,
+  "p95_ms": 2.3769615218043327,
+  "p99_ms": 4.122558049857616,
+  "qps": 576.22,
+  "clients": 1,
+  "timestamp": "2026-04-24T10:56:58.266384+00:00"
+}
